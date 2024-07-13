@@ -1,0 +1,26 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Game",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/jw_demo/app.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Edit tiles",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/venv/bin/pyxel",
+            "args": [
+                "edit",
+                "${workspaceFolder}/jw_demo/assets/characters"
+            ],
+            "console": "integratedTerminal"
+        }
+    ]
+}
