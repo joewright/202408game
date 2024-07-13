@@ -3,8 +3,12 @@ This is a demo app made with [Pyxel](https://github.com/kitao/pyxel).
 
 There's a global menu with each button opening a Scene.
 
-### Run it
-Web link TBD
+### Demo
+Live demo is available via `kitao.github.com` [here](https://kitao.github.io/pyxel/wasm/launcher/?run=joewright.202408game.jw_demo.app)
+
+More details for creating the web version are available here: https://github.com/kitao/pyxel/wiki/How-To-Use-Pyxel-Web
+
+### Running it locally:
 
 ```sh
 # install virtualenv
