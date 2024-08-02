@@ -14,6 +14,7 @@ class SceneMeta:
         raise NotImplementedError
 
 
+# here's the game
 class App:
     target_fps = 60
     current_scene: SceneMeta = None
@@ -28,12 +29,17 @@ class App:
 
     def __init__(self):
         self.pyxel = pyxel
+        # 120 pixel square canvas, set the page title and target FPS
         pyxel.init(120, 120, title="Big demo", fps=self.target_fps)
+        # enable built-in pyxel mouse cursor
         pyxel.mouse(True)
+        # organize the game scenes
         self.scenes = [SceneA(self), SceneB(self), SceneC(self)]
+        # start the program
         pyxel.run(self.update, self.draw)
 
     def detect_menu_click(self):
+        """Helper to determine which menu item was clicked"""
         bounds = [0, 0, 0, 0]
         for index, entry in enumerate(self.menu):
             x, y, text, _ = entry
@@ -50,6 +56,8 @@ class App:
                 return index
 
     def update(self):
+        """Game loop - update game state"""
+        # update the currently loaded scene
         if self.current_scene:
             self.current_scene.update()
 
@@ -64,10 +72,13 @@ class App:
                 self.show_exit_message = False
                 self.current_scene = self.scenes[clicked_index]
 
+        # allow the user to quit the game
         if self.pyxel.btnp(pyxel.KEY_Q):
             pyxel.quit()
 
     def draw(self):
+        """Game loop - render the view"""
+        # clear and redraw the screen
         self.pyxel.cls(0)
         for entry in self.menu:
             self.pyxel.text(*entry)
@@ -79,7 +90,9 @@ class App:
             self.pyxel.text(10, 70, "Press 'q' to quit", pyxel.COLOR_RED)
 
 
+# helper class for the dancing sprite
 class Dancer:
+    # point to image locations in the sprite sheet
     images = [
         # sprite sheet X, sprite sheet Y, width, height
         # will be passed to pyxel.blt as args: u, v, w, h
@@ -90,6 +103,7 @@ class Dancer:
     ]
 
     def __init__(self, x: int, y: int):
+        # set the position and prepare the image tiles
         self.x = x
         self.y = y
         self.dx = 1
@@ -116,16 +130,20 @@ class Dancer:
 
 class SceneA(SceneMeta):
     def __init__(self, app: App):
+        # load scene assets and start the scene
         self.app = app
         self.text = "Animated dancing sprite scene"
         app.pyxel.load("assets/characters.pyxres")
 
-        self.dancer = Dancer(0, 0)
+        self.dancer = Dancer(24, 24)
 
-    def update(self):
+    def handle_animation(self):
         # change dancer image every quarter second
         if self.app.pyxel.frame_count % 24 == 0:
             self.dancer.update()
+
+    def update(self):
+        self.handle_animation()
 
         # accept input to move the dancer
         if self.app.pyxel.btn(pyxel.KEY_LEFT):
@@ -153,6 +171,7 @@ class SceneB(SceneMeta):
         self.app.pyxel.text(10, 10, self.text, pyxel.COLOR_RED)
 
 
+# helper class for a clockwise keyboard
 class SoundController:
     images = [
         # sprite sheet X, sprite sheet Y, width, height
@@ -180,11 +199,12 @@ class SoundController:
         (-8, 8),
     ]
     overall_xy = [32, 24]
-    sound_notes = ["C#2", "D2", "E2", "F2", "G2", "A2", "B2", "C2"]
+    sound_notes = ["C2", "D2", "E2", "F2", "G2", "A2", "B2", "C3"]
     notes = list()
 
     def __init__(self, app: App):
         self.app = app
+        # create pyxel note objects for later playback
         for note in self.sound_notes:
             sound = self.app.pyxel.Sound()
             sound.set_notes(note)
