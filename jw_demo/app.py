@@ -28,7 +28,7 @@ class App:
 
     def __init__(self):
         self.pyxel = pyxel
-        pyxel.init(120, 120, title="We done did it", fps=self.target_fps)
+        pyxel.init(120, 120, title="Big demo", fps=self.target_fps)
         pyxel.mouse(True)
         self.scenes = [SceneA(self), SceneB(self), SceneC(self)]
         pyxel.run(self.update, self.draw)
