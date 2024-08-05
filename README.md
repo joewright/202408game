@@ -8,6 +8,8 @@ Live demo is available via `kitao.github.com` [here](https://kitao.github.io/pyx
 
 More details for creating the web version are available here: https://github.com/kitao/pyxel/wiki/How-To-Use-Pyxel-Web
 
+Link to August 2024 [PyATL](https://pyatl.dev/) slides: https://docs.google.com/presentation/d/12s_L2rrJNBV2-5rauwABA3vQQp5MPtDaLxIa42Dc21s
+
 ### Running it locally:
 
 ```sh

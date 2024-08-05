@@ -30,7 +30,7 @@ class App:
     def __init__(self):
         self.pyxel = pyxel
         # 120 pixel square canvas, set the page title and target FPS
-        pyxel.init(120, 120, title="Big demo", fps=self.target_fps)
+        pyxel.init(120, 120, title="Big demo.", fps=self.target_fps)
         # enable built-in pyxel mouse cursor
         pyxel.mouse(True)
         # organize the game scenes
